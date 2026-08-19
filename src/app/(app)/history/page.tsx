@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CalendarDays } from "lucide-react";
 import { ComingSoon } from "@/components/layout/coming-soon";
 
-export const metadata: Metadata = { title: "History — Macroloom" };
+export const metadata: Metadata = { title: "History — Slimorie" };
 
 export default function HistoryPage() {
   return (

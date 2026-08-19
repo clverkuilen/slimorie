@@ -4,7 +4,7 @@ import { GoalsForm } from "@/components/settings/goals-form";
 import { createClient } from "@/lib/supabase/server";
 import { userLocalDateString } from "@/lib/utils/date";
 
-export const metadata: Metadata = { title: "Goals — Macroloom" };
+export const metadata: Metadata = { title: "Goals — Slimorie" };
 
 export default async function GoalsPage() {
   const supabase = await createClient();

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { UtensilsCrossed } from "lucide-react";
 import { ComingSoon } from "@/components/layout/coming-soon";
 
-export const metadata: Metadata = { title: "Food — Macroloom" };
+export const metadata: Metadata = { title: "Food — Slimorie" };
 
 export default function FoodPage() {
   return (

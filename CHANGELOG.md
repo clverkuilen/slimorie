@@ -5,7 +5,7 @@
 ### Added — Phase 1: Foundation
 
 - Next.js 16 (App Router, Turbopack) + TypeScript + Tailwind v4 + shadcn/ui project scaffold.
-- Supabase project (`macroloom`) with full initial schema: `profiles`, `goals`, `foods` +
+- Supabase project with full initial schema: `profiles`, `goals`, `foods` +
   `food_sources` + `food_servings` + `food_nutrients` (extensible EAV nutrition model),
   `food_log_entries` (nutrition-snapshotting) + `daily_summaries` (trigger-maintained cache),
   `saved_meals`/`saved_meal_items`, `recipes`/`recipe_items` (schema only), `weight_entries`,

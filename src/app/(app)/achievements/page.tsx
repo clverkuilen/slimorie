@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = { title: "Achievements — Macroloom" };
+export const metadata: Metadata = { title: "Achievements — Slimorie" };
 
 export default async function AchievementsPage() {
   const supabase = await createClient();

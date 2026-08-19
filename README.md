@@ -1,4 +1,4 @@
-# Macroloom
+# Slimorie
 
 > Open the app → log food → get on with your day.
 

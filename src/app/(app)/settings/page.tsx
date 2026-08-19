@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { signOut } from "@/lib/actions/auth";
 import { createClient } from "@/lib/supabase/server";
 
-export const metadata: Metadata = { title: "Settings — Macroloom" };
+export const metadata: Metadata = { title: "Settings — Slimorie" };
 
 function SettingsLink({
   href,

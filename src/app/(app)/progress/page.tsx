@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WeightForm } from "@/components/progress/weight-form";
 import { createClient } from "@/lib/supabase/server";
 
-export const metadata: Metadata = { title: "Progress — Macroloom" };
+export const metadata: Metadata = { title: "Progress — Slimorie" };
 
 export default async function ProgressPage() {
   const supabase = await createClient();

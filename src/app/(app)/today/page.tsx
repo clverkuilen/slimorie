@@ -8,7 +8,7 @@ import { getTodayDashboardData } from "@/lib/data/today";
 import { createClient } from "@/lib/supabase/server";
 import { formatLongDate } from "@/lib/utils/date";
 
-export const metadata: Metadata = { title: "Today — Macroloom" };
+export const metadata: Metadata = { title: "Today — Slimorie" };
 
 const MEAL_LABELS = {
   breakfast: "Breakfast",
