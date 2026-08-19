@@ -5,7 +5,7 @@ import { signOut } from "@/lib/actions/auth";
 export function AppHeader({ xpTotal, level }: { xpTotal: number; level: number }) {
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between border-b bg-background/95 px-4 py-3 backdrop-blur supports-backdrop-filter:bg-background/80 md:px-6">
-      <span className="text-lg font-semibold tracking-tight text-primary md:hidden">
+      <span className="text-lg font-heading font-semibold tracking-tight text-primary md:hidden">
         Slimorie
       </span>
       <div className="hidden md:block" />

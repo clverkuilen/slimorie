@@ -22,7 +22,7 @@ export default async function AchievementsPage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-4">
-      <h1 className="text-xl font-semibold tracking-tight">Achievements</h1>
+      <h1 className="text-xl font-heading font-semibold tracking-tight">Achievements</h1>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {(achievements ?? []).map((achievement) => {
           const isUnlocked = unlockedIds.has(achievement.id);

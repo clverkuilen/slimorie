@@ -38,7 +38,7 @@ export default async function TodayPage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <h1 className="text-xl font-semibold tracking-tight">{formatLongDate(logDate, timezone)}</h1>
+      <h1 className="text-xl font-heading font-semibold tracking-tight">{formatLongDate(logDate, timezone)}</h1>
 
       {!goal ? (
         <Card className="border-primary/30 bg-accent/40">

@@ -31,7 +31,7 @@ export function SidebarNav() {
       aria-label="Primary"
       className="hidden w-56 shrink-0 flex-col gap-1 border-r px-3 py-6 md:flex"
     >
-      <span className="mb-4 px-3 text-lg font-semibold tracking-tight text-primary">
+      <span className="mb-4 px-3 text-lg font-heading font-semibold tracking-tight text-primary">
         Slimorie
       </span>
       {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
