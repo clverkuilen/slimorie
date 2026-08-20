@@ -7,28 +7,28 @@ const FEATURES = [
     title: "Log in seconds",
     description:
       "Your recent and favorite foods sit right at the top, so eating the same breakfast twice means logging it twice as fast.",
-    tint: "bg-palette-burnt-tangerine/10 text-primary",
+    tint: "bg-primary/10 text-primary",
   },
   {
     icon: BadgeCheck,
     title: "Nutrition you can trust",
     description:
       "Every food carries its source — USDA, Open Food Facts, or your own entry — so you always know how solid the numbers are.",
-    tint: "bg-palette-honey-bronze/20 text-palette-honey-bronze",
+    tint: "bg-palette-light-sea-green/15 text-primary",
   },
   {
     icon: Scale,
     title: "The full picture",
     description:
       "Calories, macros, and weight trends together, not scattered across three different screens.",
-    tint: "bg-palette-jasmine/30 text-palette-honey-bronze",
+    tint: "bg-palette-amber-glow/20 text-warning-foreground",
   },
   {
     icon: Flame,
     title: "Streaks that don't punish you",
     description:
       "Light XP and streaks for showing up consistently — encouraging, never guilt-trippy.",
-    tint: "bg-palette-burnt-tangerine/10 text-primary",
+    tint: "bg-primary/10 text-primary",
   },
 ] as const;
 

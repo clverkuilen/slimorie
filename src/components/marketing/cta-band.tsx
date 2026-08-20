@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 
 export function CtaBand() {
   return (
-    <section className="bg-palette-dark-walnut">
+    <section className="bg-palette-ink-black">
       <div className="mx-auto max-w-3xl px-6 py-16 text-center md:py-20">
-        <h2 className="font-heading text-3xl font-bold tracking-tight text-palette-cornsilk text-balance md:text-4xl">
+        <h2 className="font-heading text-3xl font-bold tracking-tight text-palette-porcelain text-balance md:text-4xl">
           Your next meal is one tap away
         </h2>
-        <p className="mx-auto mt-3 max-w-md text-palette-cornsilk/80 text-balance">
+        <p className="mx-auto mt-3 max-w-md text-palette-porcelain/80 text-balance">
           Create an account, set a goal, and start logging. It takes less time than reading this
           sentence twice.
         </p>

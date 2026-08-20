@@ -8,9 +8,9 @@ export function Hero() {
       {/* Decorative gradient blobs. aria-hidden — purely visual, and
           .animate-blob-* freezes under prefers-reduced-motion. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="animate-blob-a absolute -top-24 -left-20 size-[28rem] rounded-full bg-palette-burnt-tangerine/25 blur-3xl" />
-        <div className="animate-blob-b absolute top-10 -right-24 size-[26rem] rounded-full bg-palette-honey-bronze/35 blur-3xl" />
-        <div className="animate-blob-c absolute bottom-[-6rem] left-1/4 size-[24rem] rounded-full bg-palette-jasmine/40 blur-3xl" />
+        <div className="animate-blob-a absolute -top-24 -left-20 size-[28rem] rounded-full bg-palette-light-sea-green/25 blur-3xl" />
+        <div className="animate-blob-b absolute top-10 -right-24 size-[26rem] rounded-full bg-palette-amber-glow/25 blur-3xl" />
+        <div className="animate-blob-c absolute bottom-[-6rem] left-1/4 size-[24rem] rounded-full bg-palette-light-sea-green/20 blur-3xl" />
       </div>
 
       <div className="mx-auto max-w-3xl px-6 pt-16 pb-24 text-center md:pt-24 md:pb-32">
