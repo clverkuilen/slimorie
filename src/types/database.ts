@@ -89,6 +89,35 @@ export type Database = {
         }
         Relationships: []
       }
+      favorite_foods: {
+        Row: {
+          created_at: string
+          food_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          food_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          food_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorite_foods_food_id_fkey"
+            columns: ["food_id"]
+            isOneToOne: false
+            referencedRelation: "foods"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       food_log_entries: {
         Row: {
           brand_snapshot: string | null

@@ -12,8 +12,12 @@ actually built and how to run it.
 
 **Phase 1 (Foundation) is complete:** project scaffold, database schema with RLS, auth
 (sign up / sign in / sign out / password reset), app shell with responsive navigation, and a
-live dashboard. Food search/logging, barcode scanning, history calendar, and charts are not
-built yet — see [Roadmap](#roadmap).
+live dashboard.
+
+**Phase 3 (Food Data) core loop is in:** USDA FoodData Central search + import, favorites,
+recent foods (derived from log history), quick calorie entry, and logging to a meal — all
+live-tested end to end. Barcode scanning, Open Food Facts, custom foods, history calendar,
+and charts are not built yet — see [Roadmap](#roadmap).
 
 ## Stack
 
@@ -50,6 +54,12 @@ policy. `foods` (and its child tables) are readable by everyone when system-owne
 revoked from `anon`/`authenticated` so they can't be called directly via the PostgREST RPC
 endpoint — only their triggers can invoke them.
 
+Importing a food from USDA writes a system-owned row (`owner_user_id = null`), which a normal
+user session can't do under the RLS policy above — deliberately, so a client can't inject data
+that masquerades as verified USDA data. That write goes through `SUPABASE_SERVICE_ROLE_KEY`,
+used only in `src/lib/foods/ingest.ts`, called only with data the server fetched itself from
+the real USDA API — never with client-supplied fields.
+
 ## Notable decisions
 
 - **Nutrition is an EAV table** (`food_nutrients`, keyed against a `nutrients` lookup), not
@@ -72,11 +82,22 @@ endpoint — only their triggers can invoke them.
   refresh and route protection live in `src/proxy.ts` / `src/lib/supabase/middleware.ts`.
 - **Daily boundaries use the user's timezone**, not UTC — `profiles.timezone` (defaulted from
   the browser at signup) drives `log_date` everywhere.
+- **Recent foods are derived from `food_log_entries`**, not a separate table — `DISTINCT`
+  most-recent-first, capped. Favorites needed their own table (`favorite_foods`) since there's
+  no equivalent source of truth to derive it from.
+- **Search hits the local DB and USDA live in parallel**, deduped by name+brand. Nothing gets
+  written to our DB until the user actually selects a result — search itself never writes.
+- **USDA's food data isn't uniform across data types.** Branded foods carry a single label
+  serving (`servingSize`/`servingSizeUnit`); Foundation/SR Legacy foods carry multiple
+  `foodPortions` with a real label in `modifier`; Survey (FNDDS) foods also carry
+  `foodPortions`, but `modifier` there is an internal numeric code — the real label is
+  `portionDescription`. Confirmed against live API responses during development, not
+  assumed from memory. See `src/lib/foods/usda.ts`.
 
 ## Roadmap
 
-See `SPEC.md` §75 for the full phase breakdown. Next up: USDA/Open Food Facts ingestion,
-food search, barcode scanning, and the actual Add Food flow (Phase 3).
+See `SPEC.md` §75 for the full phase breakdown. Next up: barcode scanning, Open Food Facts,
+custom foods, and search ranking beyond USDA's own relevance order.
 
 ## Testing
 
