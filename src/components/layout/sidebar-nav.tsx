@@ -11,6 +11,7 @@ import {
   Home,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/layout/logo";
 
 const NAV_ITEMS = [
   { href: "/today", label: "Today", icon: Home },
@@ -31,9 +32,7 @@ export function SidebarNav() {
       aria-label="Primary"
       className="hidden w-56 shrink-0 flex-col gap-1 border-r px-3 py-6 md:flex"
     >
-      <span className="mb-4 px-3 text-lg font-heading font-semibold tracking-tight text-primary">
-        Slimorie
-      </span>
+      <Logo iconSize={20} textClassName="text-lg text-primary" className="mb-4 px-3" />
       {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
         const active = pathname === href || pathname.startsWith(`${href}/`);
         return (

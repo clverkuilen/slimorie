@@ -94,6 +94,22 @@ the real USDA API — never with client-supplied fields.
   `portionDescription`. Confirmed against live API responses during development, not
   assumed from memory. See `src/lib/foods/usda.ts`.
 
+## Brand assets
+
+The flame mark (`assets/brand/logo-source.png`) is the source of truth for every derived
+icon — `src/app/icon.png`, `apple-icon.png`, `favicon.ico`, and everything in `public/icons/`
+(PWA manifest icons, including a maskable variant with safe-zone padding, plus the small
+wordmark icon used next to the "Slimorie" text in `src/components/layout/logo.tsx`). To
+regenerate all of them after swapping in new artwork:
+
+```bash
+npm install --no-save sharp png-to-ico
+node scripts/generate-icons.js
+```
+
+The "Slimorie" wordmark is always real text, never baked into an image — `Logo` just places
+the icon next to it.
+
 ## Roadmap
 
 See `SPEC.md` §75 for the full phase breakdown. Next up: barcode scanning, Open Food Facts,

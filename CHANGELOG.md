@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Added — Brand icon
+
+- Real logo (a flame mark) replacing the plain text-only wordmark: `src/app/icon.png` /
+  `apple-icon.png` / `favicon.ico` (a genuine multi-resolution ICO, not a renamed PNG), full
+  PWA manifest icon set including a maskable variant with proper safe-zone padding, and a
+  `Logo` component placing the icon next to the (always-real-text) "Slimorie" wordmark
+  everywhere it appears. `scripts/generate-icons.js` regenerates the whole set from
+  `assets/brand/logo-source.png` via `sharp`.
+- Also added `src/app/manifest.ts` (Next's PWA manifest route) and fixed `viewport.themeColor`,
+  which was still the old orange from before the color-palette rename.
+
 ### Added — Phase 1: Foundation
 
 - Next.js 16 (App Router, Turbopack) + TypeScript + Tailwind v4 + shadcn/ui project scaffold.
