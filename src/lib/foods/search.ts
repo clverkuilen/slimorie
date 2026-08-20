@@ -98,6 +98,14 @@ async function getCaloriesPer100(
   return new Map((data ?? []).map((row) => [row.food_id, row.amount_per_100]));
 }
 
+export interface FoodSearchResult {
+  hits: FoodSearchHit[];
+  // True when the live USDA lookup failed (network error, misconfigured
+  // key, etc). Callers use this to tell "genuinely no matches" apart from
+  // "the USDA integration is broken" instead of showing an empty state for both.
+  usdaUnavailable: boolean;
+}
+
 // Searches our own cached foods first (system foods + the user's own custom
 // foods), via trigram similarity so misspellings still surface something,
 // then supplements with a live USDA search for anything not cached yet.
@@ -108,9 +116,9 @@ export async function searchFoods(
   supabase: SupabaseClient<Database>,
   userId: string,
   query: string,
-): Promise<FoodSearchHit[]> {
+): Promise<FoodSearchResult> {
   const trimmed = query.trim();
-  if (trimmed.length < 2) return [];
+  if (trimmed.length < 2) return { hits: [], usdaUnavailable: false };
 
   const [localResult, usdaResult] = await Promise.allSettled([
     supabase
@@ -137,6 +145,10 @@ export async function searchFoods(
         }))
       : [];
 
+  const usdaUnavailable = usdaResult.status === "rejected";
+  if (usdaUnavailable) {
+    console.error("USDA search failed:", usdaResult.reason);
+  }
   const usdaHits = usdaResult.status === "fulfilled" ? usdaResult.value : [];
 
   // Don't show a USDA result we've already cached locally — cheap dedupe by
@@ -146,5 +158,5 @@ export async function searchFoods(
     (h) => !localKeys.has(`${h.name.toLowerCase()}|${h.brand?.toLowerCase() ?? ""}`),
   );
 
-  return [...localHits, ...dedupedUsdaHits];
+  return { hits: [...localHits, ...dedupedUsdaHits], usdaUnavailable };
 }

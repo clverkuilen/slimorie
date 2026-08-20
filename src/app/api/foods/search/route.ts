@@ -13,9 +13,16 @@ export async function GET(request: NextRequest) {
   if (query.trim().length < 2) return NextResponse.json({ hits: [] });
 
   try {
-    const hits = await searchFoods(supabase, user.id, query);
+    const { hits, usdaUnavailable } = await searchFoods(supabase, user.id, query);
+    if (usdaUnavailable && hits.length === 0) {
+      return NextResponse.json({
+        hits,
+        error: "We couldn't load food results right now. Try again in a moment.",
+      });
+    }
     return NextResponse.json({ hits });
-  } catch {
+  } catch (error) {
+    console.error("Food search failed:", error);
     return NextResponse.json({ hits: [], error: "Search is temporarily unavailable." });
   }
 }
