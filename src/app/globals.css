@@ -41,6 +41,11 @@
   --color-card: var(--card);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-palette-dark-walnut: var(--palette-dark-walnut);
+  --color-palette-burnt-tangerine: var(--palette-burnt-tangerine);
+  --color-palette-honey-bronze: var(--palette-honey-bronze);
+  --color-palette-jasmine: var(--palette-jasmine);
+  --color-palette-cornsilk: var(--palette-cornsilk);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -50,79 +55,105 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Brand palette, as specified by design. Same in both themes — component
+   code should reach for the semantic tokens below (--primary, --accent,
+   etc.), not these, since a couple of the semantic tokens are deliberately
+   adjusted a bit further off the raw swatch to clear WCAG AA (see notes
+   below). These raw swatches stay available for one-off uses (e.g. a chart
+   legend, a marketing surface) that want the exact brand color regardless.
+   Verified with the WCAG 2 contrast formula (relative luminance from sRGB),
+   not eyeballed — see the numbers noted inline. */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.63 0.19 39);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.96 0.04 39);
-  --accent-foreground: oklch(0.4 0.14 39);
-  --destructive: oklch(0.577 0.245 27.325);
+  --palette-dark-walnut: #61210f;
+  --palette-burnt-tangerine: #ea2b1f;
+  --palette-honey-bronze: #edae49;
+  --palette-jasmine: #f9df74;
+  --palette-cornsilk: #f9edcc;
+}
+
+:root {
+  --background: var(--palette-cornsilk);
+  --foreground: var(--palette-dark-walnut); /* 10.4:1 on background */
+  --card: #ffffff;
+  --card-foreground: var(--palette-dark-walnut); /* 12.1:1 on card */
+  --popover: #ffffff;
+  --popover-foreground: var(--palette-dark-walnut);
+  /* Burnt Tangerine darkened ~15%: the raw swatch (#ea2b1f) only reaches
+     3.7:1 on this background and 4.3:1 against white text, both short of
+     the 4.5:1 AA text minimum. This shade clears both (4.7:1 / 5.5:1)
+     while staying visually indistinguishable from the brand color. */
+  --primary: #ce1e13;
+  --primary-foreground: #ffffff; /* 5.5:1 on primary */
+  --secondary: #f0e1c1;
+  --secondary-foreground: var(--palette-dark-walnut);
+  --muted: #f0e1c1;
+  --muted-foreground: #8a4a38; /* 5.2:1 on muted, 5.8:1 on background */
+  --accent: #fcf0de;
+  --accent-foreground: var(--palette-dark-walnut); /* 10.8:1 on accent */
+  /* A deep wine red rather than a warmer red — Burnt Tangerine already
+     occupies "vivid red-orange" as primary, so destructive needed a
+     clearly different hue (not just darker/lighter) to stay distinguishable
+     from primary buttons/links at a glance. */
+  --destructive: #b01552; /* 5.9:1 on background, 6.8:1 on white */
   /* success-foreground is tuned for text on a light bg-success/10 tint (the
      only place it's used today), not for text on a solid --success fill. */
   --success: oklch(0.6 0.15 150);
   --success-foreground: oklch(0.32 0.1 150);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --border: #e7d5b5;
+  --input: #e7d5b5;
+  --ring: var(--primary);
+  --chart-1: var(--palette-dark-walnut);
+  --chart-2: var(--palette-burnt-tangerine);
+  --chart-3: var(--palette-honey-bronze);
+  --chart-4: var(--palette-jasmine);
+  --chart-5: #8a4a38;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--palette-dark-walnut);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fcf0de;
+  --sidebar-accent-foreground: var(--palette-dark-walnut);
+  --sidebar-border: #e7d5b5;
+  --sidebar-ring: var(--primary);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.68 0.18 39);
-  --primary-foreground: oklch(0.15 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.3 0.06 39);
-  --accent-foreground: oklch(0.9 0.06 39);
-  --destructive: oklch(0.704 0.191 22.216);
+  --background: #311007;
+  --foreground: var(--palette-cornsilk); /* 14.9:1 on background */
+  --card: var(--palette-dark-walnut);
+  --card-foreground: var(--palette-cornsilk); /* 10.4:1 on card */
+  --popover: var(--palette-dark-walnut);
+  --popover-foreground: var(--palette-cornsilk);
+  /* Unlike light mode, the raw swatch works here unmodified — it's a fill
+     behind dark text rather than small text on a light surface. */
+  --primary: var(--palette-burnt-tangerine);
+  --primary-foreground: #150502; /* 4.6:1 on primary */
+  --secondary: #49190b;
+  --secondary-foreground: var(--palette-cornsilk);
+  --muted: #49190b;
+  --muted-foreground: #d9a98f; /* 7:1 on muted */
+  --accent: #723216;
+  --accent-foreground: var(--palette-honey-bronze); /* 4.9:1 on accent */
+  --destructive: #e8558f; /* lightened wine red: 5.1:1 on background */
   --success: oklch(0.65 0.15 150);
   --success-foreground: oklch(0.88 0.1 150);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --ring: var(--primary);
+  --chart-1: var(--palette-cornsilk);
+  --chart-2: var(--palette-burnt-tangerine);
+  --chart-3: var(--palette-honey-bronze);
+  --chart-4: var(--palette-jasmine);
+  --chart-5: #d9a98f;
+  --sidebar: var(--palette-dark-walnut);
+  --sidebar-foreground: var(--palette-cornsilk);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: #150502;
+  --sidebar-accent: #723216;
+  --sidebar-accent-foreground: var(--palette-honey-bronze);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: var(--primary);
 }
 
 @layer base {
