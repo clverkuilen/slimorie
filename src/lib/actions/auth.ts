@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getSiteUrl } from "@/lib/utils/url";
 import {
   requestPasswordResetSchema,
   signInSchema,
@@ -43,6 +44,7 @@ export async function signUp(_prevState: ActionState, formData: FormData): Promi
     password: parsed.data.password,
     options: {
       data: { timezone: typeof timezone === "string" && timezone ? timezone : "UTC" },
+      emailRedirectTo: `${getSiteUrl()}/auth/confirm?next=/today`,
     },
   });
   if (error) return { error: error.message };
@@ -71,9 +73,8 @@ export async function requestPasswordReset(
   if (!parsed.success) return { error: firstIssueMessage(parsed.error) };
 
   const supabase = await createClient();
-  const origin = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const { error } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
-    redirectTo: `${origin}/auth/confirm?next=/settings/update-password`,
+    redirectTo: `${getSiteUrl()}/auth/confirm?next=/settings/update-password`,
   });
   if (error) return { error: error.message };
 
