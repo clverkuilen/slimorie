@@ -46,7 +46,8 @@ export async function getFoodForLogging(
     try {
       const normalized = await getUsdaFoodDetails(id);
       foodId = await upsertNormalizedFood(normalized);
-    } catch {
+    } catch (error) {
+      console.error("Failed to import USDA food:", error);
       return { error: "Couldn't load that food's details. Try again." };
     }
   }
