@@ -4,6 +4,7 @@ import { Flame, Plus, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { NutrientProgress } from "@/components/nutrition/nutrient-progress";
+import { FoodLogEntryRow } from "@/components/food/food-log-entry-row";
 import { getTodayDashboardData } from "@/lib/data/today";
 import { createClient } from "@/lib/supabase/server";
 import { formatLongDate } from "@/lib/utils/date";
@@ -90,7 +91,7 @@ export default async function TodayPage() {
       )}
 
       <Card>
-        <CardContent className="space-y-3 py-6">
+        <CardContent className="space-y-4 py-6">
           {entries.length === 0 ? (
             <div className="space-y-3 py-4 text-center">
               <p className="text-sm text-muted-foreground">No foods logged yet today.</p>
@@ -99,14 +100,37 @@ export default async function TodayPage() {
               </p>
             </div>
           ) : (
-            (Object.keys(MEAL_LABELS) as (keyof typeof MEAL_LABELS)[]).map((category) => (
-              <div key={category} className="flex items-center justify-between text-sm">
-                <span className="font-medium">{MEAL_LABELS[category]}</span>
-                <span className="tabular-nums text-muted-foreground">
-                  {Math.round(mealTotals[category])} kcal
-                </span>
-              </div>
-            ))
+            (Object.keys(MEAL_LABELS) as (keyof typeof MEAL_LABELS)[])
+              .map((category) => ({
+                category,
+                items: entries.filter((entry) => entry.meal_category === category),
+              }))
+              .filter(({ items }) => items.length > 0)
+              .map(({ category, items }) => (
+                <div key={category} className="space-y-1">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-medium">{MEAL_LABELS[category]}</span>
+                    <span className="tabular-nums text-muted-foreground">
+                      {Math.round(mealTotals[category])} kcal
+                    </span>
+                  </div>
+                  <ul className="divide-y">
+                    {items.map((entry) => (
+                      <FoodLogEntryRow
+                        key={entry.id}
+                        id={entry.id}
+                        name={entry.food_name_snapshot}
+                        brand={entry.brand_snapshot}
+                        quantity={entry.quantity}
+                        unit={entry.unit}
+                        calories={
+                          (entry.nutrition_snapshot as Record<string, number> | null)?.energy_kcal ?? 0
+                        }
+                      />
+                    ))}
+                  </ul>
+                </div>
+              ))
           )}
           <Button
             render={<Link href="/food" />}

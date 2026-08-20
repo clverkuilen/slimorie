@@ -238,6 +238,26 @@ export async function quickAdd(_prevState: ActionState, formData: FormData): Pro
   return { error: null, success: "Logged." };
 }
 
+export async function deleteFoodLogEntry(entryId: string): Promise<{ error?: string }> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "You must be signed in." };
+
+  const { error } = await supabase
+    .from("food_log_entries")
+    .delete()
+    .eq("id", entryId)
+    .eq("user_id", user.id);
+
+  if (error) return { error: "Couldn't delete that entry. Try again." };
+
+  revalidatePath("/today");
+  revalidatePath("/history");
+  return {};
+}
+
 export async function toggleFavorite(foodId: string): Promise<{ favorited: boolean; error?: string }> {
   const parsed = toggleFavoriteSchema.safeParse({ foodId });
   if (!parsed.success) return { favorited: false, error: "Invalid food." };
