@@ -47,13 +47,13 @@ export default async function SettingsPage() {
         </CardContent>
       </Card>
 
-      <Card className="p-0">
+      <Card className="gap-0 p-0">
         <SettingsLink href="/settings/goals" icon={Target} label="Daily goals" />
         <Separator />
         <SettingsLink href="/settings/update-password" icon={Target} label="Change password" />
       </Card>
 
-      <Card className="p-0">
+      <Card className="gap-0 p-0">
         <div className="flex items-center justify-between px-4 py-3 text-sm text-muted-foreground">
           <span className="flex items-center gap-3">
             <Download className="size-4" aria-hidden="true" />
