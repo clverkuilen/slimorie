@@ -66,8 +66,10 @@
   --accent: oklch(0.96 0.04 39);
   --accent-foreground: oklch(0.4 0.14 39);
   --destructive: oklch(0.577 0.245 27.325);
+  /* success-foreground is tuned for text on a light bg-success/10 tint (the
+     only place it's used today), not for text on a solid --success fill. */
   --success: oklch(0.6 0.15 150);
-  --success-foreground: oklch(0.99 0 0);
+  --success-foreground: oklch(0.32 0.1 150);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -104,7 +106,7 @@
   --accent-foreground: oklch(0.9 0.06 39);
   --destructive: oklch(0.704 0.191 22.216);
   --success: oklch(0.65 0.15 150);
-  --success-foreground: oklch(0.15 0 0);
+  --success-foreground: oklch(0.88 0.1 150);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
