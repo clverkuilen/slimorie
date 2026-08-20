@@ -32,7 +32,7 @@ export function SidebarNav() {
       aria-label="Primary"
       className="hidden w-56 shrink-0 flex-col gap-1 border-r px-3 py-6 md:flex"
     >
-      <Logo iconSize={20} textClassName="text-lg text-primary" className="mb-4 px-3" />
+      <Logo iconSize={28} textClassName="text-lg text-primary" className="mb-4 px-3" />
       {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
         const active = pathname === href || pathname.startsWith(`${href}/`);
         return (
