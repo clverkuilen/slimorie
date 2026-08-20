@@ -4,6 +4,9 @@ import { NextResponse, type NextRequest } from "next/server";
 const PUBLIC_PATHS = ["/login", "/signup", "/reset-password", "/auth"];
 
 function isPublicPath(pathname: string) {
+  // "/" is the marketing landing page for signed-out visitors — exact match
+  // only, since a prefix match would make every route public.
+  if (pathname === "/") return true;
   return PUBLIC_PATHS.some((path) => pathname.startsWith(path));
 }
 

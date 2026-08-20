@@ -167,3 +167,51 @@
     @apply font-sans;
   }
 }
+
+/* Slow-drifting gradient blobs behind the marketing hero. Kept as plain
+   CSS (not a client component) since it's decorative and never needs JS. */
+@keyframes blob-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, 6%) scale(1.08);
+  }
+}
+@keyframes blob-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-5%, -4%) scale(1.1);
+  }
+}
+@keyframes blob-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3%, -5%) scale(1.05);
+  }
+}
+
+.animate-blob-a {
+  animation: blob-drift-a 22s ease-in-out infinite;
+}
+.animate-blob-b {
+  animation: blob-drift-b 26s ease-in-out infinite;
+}
+.animate-blob-c {
+  animation: blob-drift-c 19s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob-a,
+  .animate-blob-b,
+  .animate-blob-c {
+    animation: none;
+  }
+}
